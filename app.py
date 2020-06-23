@@ -9,10 +9,10 @@ app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 
 class ReusableForm(Form):
     host = TextField('Host:', validators=[validators.required()])
-    name = TextField('Name:', validators=[validators.required()])
-    email = TextField('Email:', validators=[validators.required(), validators.Length(min=6, max=35)])
-    password = TextField('Password:', validators=[validators.required(), validators.Length(min=3, max=35)])
-    
+    database = TextField('Database:', validators=[validators.required()])
+    user = TextField('User:', validators=[validators.required()])
+    password = TextField('Password:', validators=[validators.required()])
+    database_conn = TextField('Password:', validators=[validators.required()])
 
     @app.route("/", methods=['GET', 'POST'])
     def main():
@@ -22,16 +22,13 @@ class ReusableForm(Form):
     def dbDriver():
         form = ReusableForm(request.form)
 
-        print(request)
-
-        print( form.errors)
         if request.method == 'POST':
             host=request.form['host']
-            name=request.form['name']
+            database=request.form['database']
+            user=request.form['user']
             password=request.form['password']
-            email=request.form['email']
-            print( host, name, " ", email, " ", password)
-
+            database_conn=request.form['database_conn']
+            print( host, database, user, password, database_conn)
 
         if form.validate():
         # Save the comment here.
